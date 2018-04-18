@@ -19,8 +19,8 @@ func (p *PostgreSQLSuite) Test_Postgres_CreateTable() {
 "age" integer DEFAULT '40',
 "raw" bytea NOT NULL,
 "company_id" UUID NOT NULL DEFAULT uuid_generate_v1(),
-"created_at" timestamp NOT NULL,
-"updated_at" timestamp NOT NULL
+"created_at" timestamptz NOT NULL,
+"updated_at" timestamptz NOT NULL
 );`
 
 	res, _ := fizz.AString(`
@@ -46,8 +46,8 @@ func (p *PostgreSQLSuite) Test_Postgres_CreateTable_UUID() {
 "permissions" jsonb,
 "age" integer DEFAULT '40',
 "uuid" UUID PRIMARY KEY,
-"created_at" timestamp NOT NULL,
-"updated_at" timestamp NOT NULL
+"created_at" timestamptz NOT NULL,
+"updated_at" timestamptz NOT NULL
 );`
 
 	res, _ := fizz.AString(`
@@ -68,16 +68,16 @@ func (p *PostgreSQLSuite) Test_Postgre_CreateTables_WithForeignKeys() {
 	ddl := `CREATE TABLE "users" (
 "id" SERIAL PRIMARY KEY,
 "email" VARCHAR (20) NOT NULL,
-"created_at" timestamp NOT NULL,
-"updated_at" timestamp NOT NULL
+"created_at" timestamptz NOT NULL,
+"updated_at" timestamptz NOT NULL
 );
 CREATE TABLE "profiles" (
 "id" SERIAL PRIMARY KEY,
 "user_id" INT NOT NULL,
 "first_name" VARCHAR (255) NOT NULL,
 "last_name" VARCHAR (255) NOT NULL,
-"created_at" timestamp NOT NULL,
-"updated_at" timestamp NOT NULL,
+"created_at" timestamptz NOT NULL,
+"updated_at" timestamptz NOT NULL,
 FOREIGN KEY (user_id) REFERENCES users (id)
 );`
 

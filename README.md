@@ -172,6 +172,7 @@ The `models/user.go` file contains a structure named `User` with fields `ID`, `C
 * `time` or `timestamp` (`time.Time`)
 * `nulls.Text` (`nulls.String`) which corresponds to a nullifyable string, which can be distinguished from an empty string
 * `uuid` (`uuid.UUID`)
+* `timestampwithouttz` (Postgres only) which converts to `TIMESTAMP WITHOUT TIME ZONE`. `timestamp` now defaults to `timestamptz` (with timezone) per Postgres best practices
 * Other types are passed thru and are used as [Fizz](./fizz/README.md) types.
 
 The `models/user_test.go` contains tests for the User model and they must be implemented by you.
@@ -345,7 +346,7 @@ err  = tx.Eager("Books").Where("name = 'Mark'").All(&u) // preload only Books as
  pop allows you to eager loading nested associations by using `.` character to concatenate them. Take a look at the example bellow.
 ```go
 tx.Eager("Books.User").First(&u)  // will load all Books for u and for every Book will load the user which will be the same as u.
-``` 
+```
 ```go
  tx.Eager("Books.Writers").First(&u)  // will load all Books for u and for every Book will load all Writers.
 ```

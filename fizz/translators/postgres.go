@@ -209,6 +209,10 @@ func (p *Postgres) colType(c fizz.Column) string {
 	case "uuid":
 		return "UUID"
 	case "time", "datetime":
+		return "timestamptz"
+	case "timestamp":
+		return "timestamptz"
+	case "timestampwithouttz":
 		return "timestamp"
 	case "blob":
 		return "bytea"

@@ -58,7 +58,7 @@ func colType(s string) string {
 	switch strings.ToLower(s) {
 	case "text":
 		return "string"
-	case "time", "timestamp", "datetime":
+	case "time", "timestamp", "datetime", "timestamptz", "timestampwithouttz":
 		return "time.Time"
 	case "nulls.text":
 		return "nulls.String"
